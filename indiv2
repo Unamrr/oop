@@ -1,15 +1,26 @@
-Определить класс «Автомобиль», экземпляры которого имеют поля – марка, мощность, объем двигателя. Определить функции назначения и изменения полей и функцию вывода на экран. Определить производный класс – грузовой автомобиль, экземпляры которого имеют поле – грузоподъемность. Определить функцию вывода на экран. Определить функцию переназначения грузоподъемности и функцию, определяющую возможность перевозки груза.
+/*Определить класс «Автомобиль», экземпляры которого имеют поля – марка, мощность, объем двигателя.
+ Определить функции назначения и изменения полей и функцию вывода на экран. Определить производный класс
+ – грузовой автомобиль, экземпляры которого имеют поле – грузоподъемность.
+Определить функцию вывода на экран. Определить функцию переназначения грузоподъемности и функцию,
+ определяющую возможность перевозки груза.*/
 public class Main {
     public static void main(String[] args) {
-        GruzAuto truck = new GruzAuto("КАМАЗ", 400, 12.0, 15.5);
-        
-        truck.display(); // Вывод информации
-        
-        System.out.println("Может перевезти 10 т: " + truck.canTransport(10));
-        System.out.println("Может перевезти 20 т: " + truck.canTransport(20));
-        
-        truck.setGruzopod(18.0); // Переназначение грузоподъемности
-        System.out.println("Новая грузоподъемность: " + truck.getGruzopod() + " т");
+        GruzAuto kamaz = new GruzAuto("КАМАЗ", 400, 12.0, 15.5);
+        GruzAuto man = new GruzAuto("MAN", 540, 15.2, 20.0);
+
+        kamaz.display();
+        man.display();
+
+        System.out.println("Может перевезти 10 т: " + kamaz.canTransport(10));
+        System.out.println("Может перевезти 25 т: " + kamaz.canTransport(20));
+        kamaz.setGruzopod(20.0);
+        System.out.println("Новая грузоподъемность: " + kamaz.getGruzopod() + " т");
+
+        System.out.println("Может перевезти 10 т: " + man.canTransport(10));
+        System.out.println("Может перевезти 25 т: " + man.canTransport(21));
+
+        man.setGruzopod(30.0);
+        System.out.println("Новая грузоподъемность: " + man.getGruzopod() + " т");
     }
 }
 public class Automobil {
@@ -17,71 +28,64 @@ public class Automobil {
     private double moshn;
     private double v_dvig;
 
-    public Automobil(String marka, double moshn, double v_dvig) {
-        this.marka = marka;
-        this.moshn = moshn;
-        this.v_dvig = v_dvig;
+    public Automobil(String marka, double moshn, double v_dvig){
+        this.marka=marka;
+        this.v_dvig=v_dvig;
+        this.moshn=moshn;
+
     }
 
-    // Функции назначения и изменения полей
-    public void setMarka(String marka) {
-        this.marka = marka;
+    public void setMarka(String marka){
+        this.marka=marka;
     }
-    
-    public void setMoshn(double moshn) {
+    public void setMoshn(double moshn){
         this.moshn = moshn;
     }
-    
-    public void setV_dvig(double v_dvig) {
-        this.v_dvig = v_dvig;
+    public void setV_dvig(double v_dvig){
+        this.v_dvig=v_dvig;
     }
-    
-    public String getMarka() {
+    public String getMarka(){
         return marka;
     }
-    
-    public double getMoshn() {
+    public double getMoshn(){
         return moshn;
     }
-    
-    public double getV_dvig() {
+    public double getV_dvig(){
         return v_dvig;
     }
-
-    // Функция вывода на экран
     public void display() {
         System.out.println("Марка: " + marka);
         System.out.println("Мощность: " + moshn + " л.с.");
         System.out.println("Объем двигателя: " + v_dvig + " л");
     }
 }
-
 public class GruzAuto extends Automobil {
+
     private double gruzopod;
 
     public GruzAuto(String marka, double moshn, double v_dvig, double gruzopod) {
-        super(marka, moshn, v_dvig); // Правильный вызов конструктора родителя
+        super(marka, moshn, v_dvig);
         this.gruzopod = gruzopod;
     }
-
-    // Функция переназначения грузоподъемности
     public void setGruzopod(double gruzopod) {
         this.gruzopod = gruzopod;
     }
-    
+
     public double getGruzopod() {
         return gruzopod;
     }
 
-    // Функция, определяющая возможность перевозки груза
+
     public boolean canTransport(double weight) {
         return weight <= gruzopod;
     }
 
-    // Функция вывода на экран (переопределение)
     @Override
     public void display() {
-        super.display(); // Вызов метода родителя
+        super.display();
         System.out.println("Грузоподъемность: " + gruzopod + " т");
     }
 }
+
+
+
