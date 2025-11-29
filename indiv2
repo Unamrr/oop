@@ -1,1 +1,86 @@
+public class Main {
+    public static void main(String[] args) {
+        GruzAuto truck = new GruzAuto("КАМАЗ", 400, 12.0, 15.5);
+        
+        truck.display(); // Вывод информации
+        
+        System.out.println("Может перевезти 10 т: " + truck.canTransport(10));
+        System.out.println("Может перевезти 20 т: " + truck.canTransport(20));
+        
+        truck.setGruzopod(18.0); // Переназначение грузоподъемности
+        System.out.println("Новая грузоподъемность: " + truck.getGruzopod() + " т");
+    }
+}
+public class Automobil {
+    private String marka;
+    private double moshn;
+    private double v_dvig;
 
+    public Automobil(String marka, double moshn, double v_dvig) {
+        this.marka = marka;
+        this.moshn = moshn;
+        this.v_dvig = v_dvig;
+    }
+
+    // Функции назначения и изменения полей
+    public void setMarka(String marka) {
+        this.marka = marka;
+    }
+    
+    public void setMoshn(double moshn) {
+        this.moshn = moshn;
+    }
+    
+    public void setV_dvig(double v_dvig) {
+        this.v_dvig = v_dvig;
+    }
+    
+    public String getMarka() {
+        return marka;
+    }
+    
+    public double getMoshn() {
+        return moshn;
+    }
+    
+    public double getV_dvig() {
+        return v_dvig;
+    }
+
+    // Функция вывода на экран
+    public void display() {
+        System.out.println("Марка: " + marka);
+        System.out.println("Мощность: " + moshn + " л.с.");
+        System.out.println("Объем двигателя: " + v_dvig + " л");
+    }
+}
+
+public class GruzAuto extends Automobil {
+    private double gruzopod;
+
+    public GruzAuto(String marka, double moshn, double v_dvig, double gruzopod) {
+        super(marka, moshn, v_dvig); // Правильный вызов конструктора родителя
+        this.gruzopod = gruzopod;
+    }
+
+    // Функция переназначения грузоподъемности
+    public void setGruzopod(double gruzopod) {
+        this.gruzopod = gruzopod;
+    }
+    
+    public double getGruzopod() {
+        return gruzopod;
+    }
+
+    // Функция, определяющая возможность перевозки груза
+    public boolean canTransport(double weight) {
+        return weight <= gruzopod;
+    }
+
+    // Функция вывода на экран (переопределение)
+    @Override
+    public void display() {
+        super.display(); // Вызов метода родителя
+        System.out.println("Грузоподъемность: " + gruzopod + " т");
+    }
+}
